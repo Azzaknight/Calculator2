@@ -10,39 +10,36 @@
 
 @interface CalculatorBrain ()
 
-@property (nonatomic, strong) NSMutableArray *operandStack;
+@property (nonatomic, strong) NSMutableArray *programStack;
 
 @end
 
 @implementation CalculatorBrain
 
--(NSMutableArray *)operandStack
+-(NSMutableArray *)programStack
 {
-    if(!_operandStack) {
-        _operandStack = [[NSMutableArray alloc] init];
+    if(!_programStack) {
+        _programStack = [[NSMutableArray alloc] init];
     }
-    return _operandStack;
+    return _programStack;
 }
 
 -(void)pushOperand:(double)operand{
     // pushOperand gives us a double but the Array stores only Objects.
     // so have to wrap the operand in an NSNumber
-    [self.operandStack addObject:[NSNumber numberWithDouble:operand]];
+    [self.programStack addObject:[NSNumber numberWithDouble:operand]];
     
 }
 
--(double)popOperand {
-    NSNumber * result = [self.operandStack lastObject];
-    if (result) {
-        [self.operandStack removeLastObject];
-    }
-    
-    return [result doubleValue];
-    
-}
 
 -(double)performOperation:(NSString *)operation{
     
+    [self.programStack addObject:operation];
+    return [CalculatorBrain runProgam:self.program];
+}
+
+
+/*
     double result = 0;
     
     if ([operation  isEqualToString: @"+"]){
@@ -72,11 +69,27 @@
     return result;
     
 }
+ 
+ */
+
 
 -(void)reset {
     
     // have to clear the operand stack
-    [self.operandStack removeAllObjects];
+    [self.programStack removeAllObjects];
+}
+
++(double) runProgam:(id)program {
+    
+    double result = 0;
+    
+    
+    return result;
+}
+
++(NSString *)descriptionOfProgram:(id)program {
+    
+    return @"To do this in the homework";
 }
 
 
