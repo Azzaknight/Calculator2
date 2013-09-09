@@ -84,12 +84,20 @@
     return [self.programStack copy];
 }
 
-+(double) runProgam:(id)program {
++(double)popOperandOffStack:(NSMutableArray *)stack {
     
     double result = 0;
     
+    // pop operand off the stack
+    // if it's an operation, then recursively evaluate
     
     return result;
+}
+
+
++(double) runProgam:(id)program {
+    
+    return [self popOperandOffStack:[program mutableCopy]];
 }
 
 +(NSString *)descriptionOfProgram:(id)program {
