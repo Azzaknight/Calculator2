@@ -79,6 +79,11 @@
     [self.programStack removeAllObjects];
 }
 
+-(id) program {
+    
+    return [self.programStack copy];
+}
+
 +(double) runProgam:(id)program {
     
     double result = 0;
