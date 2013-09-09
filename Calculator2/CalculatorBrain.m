@@ -39,40 +39,6 @@
 }
 
 
-/*
-    double result = 0;
-    
-    if ([operation  isEqualToString: @"+"]){
-        result = [self popOperand] + [self popOperand];
-    } else if ([operation isEqualToString:@"*"]) {
-        result = [self popOperand] * [self popOperand];
-    } else if ([operation isEqualToString:@"-"]) {
-        result = ([self popOperand] - [self popOperand]) * -1;
-    } else if ([operation isEqualToString:@"/"]) {
-        double divisor = [self popOperand];
-        if (divisor) result = [self popOperand] / divisor;
-    } else if ([operation isEqualToString:@"sin"]) {
-        result = sin([self popOperand]);
-    } else if ([operation isEqualToString:@"cos"]) {
-        result = cos([self popOperand]);
-    } else if ([operation isEqualToString:@"√"]) {
-        result = sqrt([self popOperand]);
-    } else if ([operation isEqualToString:@"π"]) {
-        result = M_PI;
-    } else if ([operation isEqualToString:@"±"]) {
-        result = ([self popOperand] * -1);
-    }
-    
-    //push the result back onto the stack
-    [self pushOperand:result];
-    
-    return result;
-    
-}
- 
- */
-
-
 -(void)reset {
     
     // have to clear the operand stack
@@ -88,8 +54,37 @@
     
     double result = 0;
     
-    // pop operand off the stack
-    // if it's an operation, then recursively evaluate
+    id topOfStack = [stack lastObject];
+    if (topOfStack) [stack removeLastObject];
+    
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        return [topOfStack doubleValue];
+    } else if ([topOfStack isKindOfClass:[NSString class]]) {
+        
+        NSString * operation = topOfStack;
+        
+        if ([operation  isEqualToString: @"+"]){
+            result = [self popOperandOffStack:stack] + [self popOperandOffStack:stack];
+        } else if ([operation isEqualToString:@"*"]) {
+            result = [self popOperandOffStack:stack] * [self popOperandOffStack:stack];
+        } else if ([operation isEqualToString:@"-"]) {
+            result = ([self popOperandOffStack:stack] - [self popOperandOffStack:stack]) * -1;
+        } else if ([operation isEqualToString:@"/"]) {
+            double divisor = [self popOperandOffStack:stack];
+            if (divisor) result = [self popOperandOffStack:stack] / divisor;
+        } else if ([operation isEqualToString:@"sin"]) {
+            result = sin([self popOperandOffStack:stack]);
+        } else if ([operation isEqualToString:@"cos"]) {
+            result = cos([self popOperandOffStack:stack]);
+        } else if ([operation isEqualToString:@"√"]) {
+            result = sqrt([self popOperandOffStack:stack]);
+        } else if ([operation isEqualToString:@"π"]) {
+            result = M_PI;
+        } else if ([operation isEqualToString:@"±"]) {
+            result = ([self popOperandOffStack:stack] * -1);
+        }
+        
+    }
     
     return result;
 }
