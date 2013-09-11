@@ -31,11 +31,18 @@
     
 }
 
+-(void)pushVariable:(NSString *)variable {
+    // Ignore the variable name if same as an operation
+    if(![CalculatorBrain isOperation:variable]) {
+        [self.programStack addObject:variable];
+    }
+}
+
 
 -(double)performOperation:(NSString *)operation{
     
     [self.programStack addObject:operation];
-    return [CalculatorBrain runProgam:self.program];
+    return [CalculatorBrain runProgram:self.program];
 }
 
 
@@ -68,7 +75,8 @@
         } else if ([operation isEqualToString:@"*"]) {
             result = [self popOperandOffStack:stack] * [self popOperandOffStack:stack];
         } else if ([operation isEqualToString:@"-"]) {
-            result = ([self popOperandOffStack:stack] - [self popOperandOffStack:stack]) * -1;
+            double subtraend = [self popOperandOffStack:stack];
+            result = [self popOperandOffStack:stack] - subtraend;
         } else if ([operation isEqualToString:@"/"]) {
             double divisor = [self popOperandOffStack:stack];
             if (divisor) result = [self popOperandOffStack:stack] / divisor;
@@ -89,16 +97,68 @@
     return result;
 }
 
-
-+(double) runProgam:(id)program {
++(BOOL) isOperation:(NSString*)operation {
     
-    NSMutableArray * stack;
-    if ([program isKindOfClass:[NSArray class]]) {
-        stack = [program mutableCopy];
+    NSArray *operationList = @[@"+", @"-", @"*", @"/", @"sin", @"cos", @"√", @"π", @"±"];
+    NSSet *operationSet = [NSSet setWithArray:operationList];
+    return [operationSet containsObject:operation];
+    
+}
+
++(NSSet *) variablesUsedInProgram:(id)program {
+    
+    NSMutableArray * variableList = [@[] mutableCopy];
+    NSArray *programStack = (NSArray*)program;
+    
+    for (id items in programStack) {
+        if([items isKindOfClass:[NSString class]]) {
+            if (![self isOperation:items]){
+                NSLog(@"The name of the variable is %@", items);
+                [variableList addObject:items];
+            }
+        }
     }
     
-    return [self popOperandOffStack:stack];
+    
+    NSLog(@"The items in the array %i", [variableList count]);
+    if ([variableList count] != 0) {
+        NSLog(@"I shouldnt reach here");
+        return [NSSet setWithArray:variableList];
+    } else return nil;
+    
 }
+
+
+
++(double) runProgram:(id)program {
+    
+    return [self runProgram:program withVariables:nil];
+    
+}
+
+
++(double) runProgram:(id)program withVariables:(NSDictionary *)variableValues {
+    
+    NSMutableArray *stack;
+    if([program isKindOfClass:[NSArray class]]) {
+        stack = [program mutableCopy];
+        
+        NSSet* var = [self variablesUsedInProgram:program];
+        
+        if(var){
+            
+            for(int i=0; i < [program count]; i++) {
+                if([var containsObject:stack[i]]) {
+                    [stack replaceObjectAtIndex:i withObject:[variableValues objectForKey:stack[i]]];
+                    
+                }
+            }
+        }
+        return [self popOperandOffStack:stack];
+    }
+    return 0;
+}
+
 
 +(NSString *)descriptionOfProgram:(id)program {
     
