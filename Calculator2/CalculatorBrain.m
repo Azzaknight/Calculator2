@@ -107,7 +107,8 @@
 
 +(NSSet *) variablesUsedInProgram:(id)program {
     
-    NSMutableArray * variableList = [@[] mutableCopy];
+   // NSMutableArray * variableList = [@[] mutableCopy];
+    NSMutableSet * variableList = [NSMutableSet set];
     NSArray *programStack = (NSArray*)program;
     
     for (id items in programStack) {
@@ -123,7 +124,7 @@
     NSLog(@"The items in the array %i", [variableList count]);
     if ([variableList count] != 0) {
         NSLog(@"I shouldnt reach here");
-        return [NSSet setWithArray:variableList];
+        return [variableList copy];
     } else return nil;
     
 }
