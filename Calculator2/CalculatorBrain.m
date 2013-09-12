@@ -99,11 +99,33 @@
 
 +(BOOL) isOperation:(NSString*)operation {
     
-    NSArray *operationList = @[@"+", @"-", @"*", @"/", @"sin", @"cos", @"√", @"π", @"±"];
+    return ([self isTwoOperandOperation:operation] ||
+    [self isOneOperandOperation:operation] ||
+    [self isNoOperandOperation:operation]);
+}
+
++(BOOL) isTwoOperandOperation:(NSString *) operation {
+    
+    NSArray *operationList = @[@"+", @"-", @"*", @"/"];
     NSSet *operationSet = [NSSet setWithArray:operationList];
     return [operationSet containsObject:operation];
-    
 }
+
++(BOOL) isOneOperandOperation:(NSString *) operation {
+    
+    NSArray *operationList = @[@"sin", @"cos", @"√"];
+    NSSet *operationSet = [NSSet setWithArray:operationList];
+    return [operationSet containsObject:operation];
+}
+
++(BOOL) isNoOperandOperation:(NSString *) operation {
+    
+    NSArray *operationList = @[@"π", @"±"];
+    NSSet *operationSet = [NSSet setWithArray:operationList];
+    return [operationSet containsObject:operation];
+}
+
+
 
 +(NSSet *) variablesUsedInProgram:(id)program {
     
