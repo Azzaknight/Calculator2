@@ -113,14 +113,14 @@
 
 +(BOOL) isOneOperandOperation:(NSString *) operation {
     
-    NSArray *operationList = @[@"sin", @"cos", @"√"];
+    NSArray *operationList = @[@"sin", @"cos", @"√", @"±"];
     NSSet *operationSet = [NSSet setWithArray:operationList];
     return [operationSet containsObject:operation];
 }
 
 +(BOOL) isNoOperandOperation:(NSString *) operation {
     
-    NSArray *operationList = @[@"π", @"±"];
+    NSArray *operationList = @[@"π"];
     NSSet *operationSet = [NSSet setWithArray:operationList];
     return [operationSet containsObject:operation];
 }
@@ -177,15 +177,92 @@
                 }
             }
         }
+        NSLog(@"%@",[self descriptionOfProgram:program]);
         return [self popOperandOffStack:stack];
+        
     }
     return 0;
+}
+
++(NSString *) suppressBrackets:(NSString *)expression {
+    
+    NSString * description = expression;
+    
+    if([description hasPrefix:@"("] && [description hasSuffix:@")"]){
+        
+        description = [description substringFromIndex:1];
+        description = [description substringToIndex:[description length]-1];
+    }
+    
+    NSRange openBracket = [description rangeOfString:@"("];
+    NSRange closeBracket = [description rangeOfString:@")"];
+    
+    if(openBracket.location <= closeBracket.location) return description;
+    else return expression;
+    
+}
+
++(NSString *)descriptionOfTopOfStack:(NSMutableArray *)stack {
+    
+    NSString *description;
+    
+    id topOfStack = [stack lastObject];
+    if (topOfStack) [stack removeLastObject];
+    
+    if([topOfStack isKindOfClass:[NSNumber class]]){
+        return [topOfStack description];
+    }
+    
+    if ([topOfStack isKindOfClass:[NSString class]]){
+        
+        if([self isTwoOperandOperation:topOfStack]) {
+            // Either it's TwoOperandOperation
+            
+            NSString* secondOperand = [self descriptionOfTopOfStack:stack];
+            NSString* firstOperand = [self descriptionOfTopOfStack:stack];
+            
+            NSSet * higherOrder = [NSSet setWithObjects:@"*",@"/", nil];
+            if([higherOrder containsObject:topOfStack]){
+                description = [NSString stringWithFormat:@"%@ %@ %@",firstOperand,topOfStack, secondOperand];
+            } else {
+            description = [NSString stringWithFormat:@"(%@ %@ %@)",[self suppressBrackets:firstOperand],topOfStack, [self suppressBrackets:secondOperand]];
+            }
+            
+        } else if ([self isOneOperandOperation:topOfStack]) {
+            // Or a One operand operation
+            
+            NSString* operand = [self descriptionOfTopOfStack:stack];
+            description = [NSString stringWithFormat:@"(%@(%@))",[self suppressBrackets:topOfStack], operand];
+        }else {
+            // Else it's a NoOperandOperation or Variable
+            // In which case we return it as it is.
+            description = topOfStack;
+        }
+    }
+    
+    return description;
 }
 
 
 +(NSString *)descriptionOfProgram:(id)program {
     
-    return @"To do this in the homework";
+    
+    if([program isKindOfClass:[NSArray class]]){
+        
+        NSMutableArray *stack = [program mutableCopy];
+        NSMutableArray *expressions = [NSMutableArray array];
+        
+        while ([stack count] > 0){
+            [expressions addObject:[self suppressBrackets:[self descriptionOfTopOfStack:stack]]];
+        }
+        
+        return [expressions componentsJoinedByString:@","];
+        
+    } else {
+     
+        return @"error";
+    }
+
 }
 
 
