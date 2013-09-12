@@ -232,7 +232,7 @@
             // Or a One operand operation
             
             NSString* operand = [self descriptionOfTopOfStack:stack];
-            description = [NSString stringWithFormat:@"(%@(%@))",[self suppressBrackets:topOfStack], operand];
+            description = [NSString stringWithFormat:@"(%@(%@))", topOfStack, [self suppressBrackets:operand]];
         }else {
             // Else it's a NoOperandOperation or Variable
             // In which case we return it as it is.

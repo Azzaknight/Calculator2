@@ -60,8 +60,9 @@
 - (IBAction)operationPressed:(UIButton *)sender {
     
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
-    [self appendToHistory:[[sender currentTitle] stringByAppendingString:@" ="]];
+    //[self appendToHistory:[[sender currentTitle] stringByAppendingString:@" ="]];
     double result = [self.calculatorBrain performOperation:[sender currentTitle]];
+    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
     self.display.text = [NSString stringWithFormat:@"%g",result];
     
     
@@ -70,7 +71,8 @@
 - (IBAction)enterPressed {
     
     [self.calculatorBrain pushOperand:[self.display.text doubleValue]];
-    [self appendToHistory:[self.display.text stringByAppendingString:@" "]];
+    //[self appendToHistory:[self.display.text stringByAppendingString:@" "]];
+    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
     self.userIsInTheMiddleOfEnteringANumber = NO;
     
 }
