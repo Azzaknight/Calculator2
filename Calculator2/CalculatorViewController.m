@@ -74,6 +74,20 @@
     
 }
 
+
+-(void)displayVariableValueWithVariables:(NSDictionary *)valueDict {
+    
+    for(id items in valueDict) {
+        
+        if ([items isKindOfClass:[NSString class]]){
+            NSString * values = [NSString stringWithFormat:@"%@ = %@  ", items, [valueDict objectForKey:items]];
+            self.variableDisplay.text = [self.variableDisplay.text stringByAppendingString:values];
+                                 
+        }
+    }
+    
+}
+
 - (IBAction)operationPressed:(UIButton *)sender {
     
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
@@ -84,6 +98,7 @@
     
     
     result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:[self testDisplayValues]];
+    [self displayVariableValueWithVariables:[self testDisplayValues]];
     self.display.text = [NSString stringWithFormat:@"%g",result];
     
 }
@@ -148,6 +163,7 @@
     [self.calculatorBrain reset];
     self.display.text = @"0";
     self.history.text = @"";
+    self.variableDisplay.text = @"";
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
