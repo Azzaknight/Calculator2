@@ -13,10 +13,18 @@
 
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
 @property (nonatomic, strong) CalculatorBrain *calculatorBrain;
+@property (nonatomic, strong) NSDictionary * testDisplayValues;
 
 @end
 
 @implementation CalculatorViewController
+
+-(NSDictionary *) testDisplayValues
+{
+    if(!_testDisplayValues) _testDisplayValues = @{@"x":@(5.0), @"y":@(10.0), @"z":@(25.0)};
+    return _testDisplayValues;
+}
+
 
 -(CalculatorBrain *)calculatorBrain
 {
@@ -72,8 +80,11 @@
     //[self appendToHistory:[[sender currentTitle] stringByAppendingString:@" ="]];
     double result = [self.calculatorBrain performOperation:[sender currentTitle]];
     self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
-    self.display.text = [NSString stringWithFormat:@"%g",result];
+   // self.display.text = [NSString stringWithFormat:@"%g",result];
     
+    
+    result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:[self testDisplayValues]];
+    self.display.text = [NSString stringWithFormat:@"%g",result];
     
 }
 
