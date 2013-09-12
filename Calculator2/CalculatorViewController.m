@@ -43,6 +43,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)variablePressed:(UIButton *)sender {
+    
+    // the variable was pressed!
+    if(self.userIsInTheMiddleOfEnteringANumber){
+        [self enterPressed];
+    }
+    [self.calculatorBrain pushVariable:[sender currentTitle]];
+    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
+}
 
 - (IBAction)digitPressed:(UIButton *)sender {
     

@@ -172,7 +172,11 @@
             
             for(int i=0; i < [program count]; i++) {
                 if([var containsObject:stack[i]]) {
-                    [stack replaceObjectAtIndex:i withObject:[variableValues objectForKey:stack[i]]];
+                    
+                    NSNumber *item_to_replace = [variableValues objectForKey:stack[i]];
+                    if(!item_to_replace) item_to_replace = @(0.0);//[NSNumber numberWithDouble:0.0];
+                    
+                    [stack replaceObjectAtIndex:i withObject:item_to_replace];
                     
                 }
             }
