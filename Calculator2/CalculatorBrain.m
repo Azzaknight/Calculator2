@@ -46,6 +46,11 @@
 }
 
 
+-(void)undo {
+  
+    if([self.programStack lastObject]) [self.programStack removeLastObject];
+}
+
 -(void)reset {
     
     // have to clear the operand stack
@@ -131,7 +136,7 @@
     
    // NSMutableArray * variableList = [@[] mutableCopy];
     NSMutableSet * variableList = [NSMutableSet set];
-    NSArray *programStack = (NSArray*)program;
+    NSArray *programStack = [program copy];
     
     for (id items in programStack) {
         if([items isKindOfClass:[NSString class]]) {

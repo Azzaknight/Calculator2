@@ -47,6 +47,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) updateCalculatedDisplay {
+    
+    [self displayVariableValueWithVariables:self.testDisplayValues];
+    double result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:self.testDisplayValues];
+    self.display.text = [NSString stringWithFormat:@"%g",result];
+    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
+}
+
 - (IBAction)testVariablesPressed:(UIButton *)sender {
     
     if([[sender currentTitle] isEqualToString:@"Test1"]){
@@ -66,10 +74,8 @@
         self.testDisplayValues = @{@"x":@(6.5), @"z":@(5.0)};
     }
     
-    [self displayVariableValueWithVariables:self.testDisplayValues];
-    double result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:self.testDisplayValues];
-    self.display.text = [NSString stringWithFormat:@"%g",result];
-    
+    [self updateCalculatedDisplay];
+
 }
 
 
@@ -118,13 +124,10 @@
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     //[self appendToHistory:[[sender currentTitle] stringByAppendingString:@" ="]];
     double result = [self.calculatorBrain performOperation:[sender currentTitle]];
-    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
+    NSLog(@"This log added to remove warning!%f",result);
    // self.display.text = [NSString stringWithFormat:@"%g",result];
     
-    
-    result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:[self testDisplayValues]];
-    [self displayVariableValueWithVariables:[self testDisplayValues]];
-    self.display.text = [NSString stringWithFormat:@"%g",result];
+    [self updateCalculatedDisplay];
     
 }
 
@@ -165,7 +168,20 @@
         self.display.text = @"0";
         self.userIsInTheMiddleOfEnteringANumber = NO;
     }
+   
+}
+
+
+- (IBAction)undoPressed {
     
+    if(self.userIsInTheMiddleOfEnteringANumber) {
+        [self backSpacePressed];
+    } else {
+        [self.calculatorBrain undo];
+        self.testDisplayValues = nil;
+        [self updateCalculatedDisplay];
+        
+    }
 }
 
 - (IBAction)plusMinusPressed:(UIButton *)sender {

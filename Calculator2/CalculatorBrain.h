@@ -14,6 +14,7 @@
 -(void)pushVariable:(NSString *)variable;
 -(double)performOperation:(NSString *)operation;
 -(void)reset;
+-(void)undo;
 
 @property (readonly) id program;
 
@@ -23,6 +24,7 @@
 // Assignment 2
 
 +(double) runProgram:(id)program withVariables:(NSDictionary *)variableValues;
+
 
 
 @end
