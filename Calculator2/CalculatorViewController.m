@@ -19,11 +19,6 @@
 
 @implementation CalculatorViewController
 
--(NSDictionary *) testDisplayValues
-{
-    if(!_testDisplayValues) _testDisplayValues = @{@"x":@(5.0), @"y":@(10.0), @"z":@(25.0)};
-    return _testDisplayValues;
-}
 
 
 -(CalculatorBrain *)calculatorBrain
@@ -51,6 +46,34 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)testVariablesPressed:(UIButton *)sender {
+    
+    if([[sender currentTitle] isEqualToString:@"Test1"]){
+        
+        self.testDisplayValues = @{@"x":@(5.0), @"y":@(10.0), @"z":@(25.0)};
+        
+    } else if([[sender currentTitle] isEqualToString:@"Test2"]){
+        
+        self.testDisplayValues = nil;
+        
+    } else if([[sender currentTitle] isEqualToString:@"Test3"]) {
+        
+        self.testDisplayValues = @{@"x":@(-2.0), @"y":@(0.0), @"z":@(7.5)};
+        
+    } else if([[sender currentTitle] isEqualToString:@"Test4"]) {
+        
+        self.testDisplayValues = @{@"x":@(6.5), @"z":@(5.0)};
+    }
+    
+    [self displayVariableValueWithVariables:self.testDisplayValues];
+    double result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:self.testDisplayValues];
+    self.display.text = [NSString stringWithFormat:@"%g",result];
+    
+}
+
+
+
 - (IBAction)variablePressed:(UIButton *)sender {
     
     // the variable was pressed!
@@ -77,6 +100,8 @@
 
 -(void)displayVariableValueWithVariables:(NSDictionary *)valueDict {
     
+    
+    self.variableDisplay.text = @"";
     for(id items in valueDict) {
         
         if ([items isKindOfClass:[NSString class]]){
@@ -164,6 +189,7 @@
     self.display.text = @"0";
     self.history.text = @"";
     self.variableDisplay.text = @"";
+    self.testDisplayValues = nil;
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
