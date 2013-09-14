@@ -50,8 +50,9 @@
 -(void) updateCalculatedDisplay {
     
     [self displayVariableValueWithVariables:self.testDisplayValues];
-    double result = [CalculatorBrain runProgram:self.calculatorBrain.program withVariables:self.testDisplayValues];
-    self.display.text = [NSString stringWithFormat:@"%g",result];
+    id result = [CalculatorBrain runProgram:self.calculatorBrain.program withVariables:self.testDisplayValues];
+    if([result isKindOfClass:[NSNumber class]]) self.display.text = [NSString stringWithFormat:@"%g",[result doubleValue]];
+    else if ([result isKindOfClass:[NSString class]]) self.display.text = [NSString stringWithFormat:@"%@", result];
     self.history.text = [CalculatorBrain descriptionOfProgram:self.calculatorBrain.program];
 }
 
@@ -136,8 +137,7 @@
     
     if (self.userIsInTheMiddleOfEnteringANumber) [self enterPressed];
     //[self appendToHistory:[[sender currentTitle] stringByAppendingString:@" ="]];
-    double result = [self.calculatorBrain performOperation:[sender currentTitle]];
-    NSLog(@"This log added to remove warning!%f",result);
+    [self.calculatorBrain pushOperation:[sender currentTitle]];
    // self.display.text = [NSString stringWithFormat:@"%g",result];
     
     [self updateCalculatedDisplay];

@@ -12,18 +12,18 @@
 
 -(void)pushOperand:(double)operand;
 -(void)pushVariable:(NSString *)variable;
--(double)performOperation:(NSString *)operation;
+-(void)pushOperation:(NSString *)operation;
 -(void)reset;
 -(void)undo;
 
 @property (readonly) id program;
 
-+(double) runProgram:(id) program;
++(id) runProgram:(id) program;
 +(NSString *) descriptionOfProgram:(id) program;
 
 // Assignment 2
 
-+(double) runProgram:(id)program withVariables:(NSDictionary *)variableValues;
++(id) runProgram:(id)program withVariables:(NSDictionary *)variableValues;
 
 +(NSSet *) variablesUsedInProgram:(id)program ;
 
