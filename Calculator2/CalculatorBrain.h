@@ -25,6 +25,6 @@
 
 +(double) runProgram:(id)program withVariables:(NSDictionary *)variableValues;
 
-
++(NSSet *) variablesUsedInProgram:(id)program ;
 
 @end

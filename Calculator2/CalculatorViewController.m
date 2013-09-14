@@ -50,9 +50,9 @@
 -(void) updateCalculatedDisplay {
     
     [self displayVariableValueWithVariables:self.testDisplayValues];
-    double result = [CalculatorBrain runProgram:[self.calculatorBrain program] withVariables:self.testDisplayValues];
+    double result = [CalculatorBrain runProgram:self.calculatorBrain.program withVariables:self.testDisplayValues];
     self.display.text = [NSString stringWithFormat:@"%g",result];
-    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
+    self.history.text = [CalculatorBrain descriptionOfProgram:self.calculatorBrain.program];
 }
 
 - (IBAction)testVariablesPressed:(UIButton *)sender {
@@ -71,7 +71,7 @@
         
     } else if([[sender currentTitle] isEqualToString:@"Test4"]) {
         
-        self.testDisplayValues = @{@"x":@(6.5), @"z":@(5.0)};
+        self.testDisplayValues = @{@"x":@(6.5),@"y":@(12.75), @"z":@(5.0)};
     }
     
     [self updateCalculatedDisplay];
@@ -87,7 +87,8 @@
         [self enterPressed];
     }
     [self.calculatorBrain pushVariable:[sender currentTitle]];
-    self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
+    //self.history.text = [CalculatorBrain descriptionOfProgram:[self.calculatorBrain program]];
+    [self updateCalculatedDisplay];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
@@ -108,9 +109,21 @@
     
     
     self.variableDisplay.text = @"";
+    NSSet* variablesInProgram = [CalculatorBrain variablesUsedInProgram:self.calculatorBrain.program];
+    
+    // If the dictionary is nil, and there are variables in the program, set their values to 0!
+    if(!valueDict){
+        for( id items in variablesInProgram) {
+            NSString * values = [NSString stringWithFormat:@"%@ = 0  ", items];
+            self.variableDisplay.text = [self.variableDisplay.text stringByAppendingString:values];
+            
+        }
+    }
+    
+    // If the dictionary is not nil, then for the variables in the program, display their values!
     for(id items in valueDict) {
         
-        if ([items isKindOfClass:[NSString class]]){
+        if ([items isKindOfClass:[NSString class]] && [variablesInProgram containsObject:items]){
             NSString * values = [NSString stringWithFormat:@"%@ = %@  ", items, [valueDict objectForKey:items]];
             self.variableDisplay.text = [self.variableDisplay.text stringByAppendingString:values];
                                  
@@ -178,7 +191,6 @@
         [self backSpacePressed];
     } else {
         [self.calculatorBrain undo];
-        self.testDisplayValues = nil;
         [self updateCalculatedDisplay];
         
     }
