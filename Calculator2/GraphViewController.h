@@ -1,0 +1,18 @@
+//
+//  GraphViewController.h
+//  Calculator2
+//
+//  Created by Pamamarch on 09/10/2013.
+//  Copyright (c) 2013 Finger Flick Games. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface GraphViewController : UIViewController
+
+// the model of the GraphicViewController is the program of the calculator which
+// is the NSArray of the operands and operations!
+
+
+
+@end

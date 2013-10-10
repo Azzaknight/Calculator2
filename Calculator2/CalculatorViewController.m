@@ -49,7 +49,7 @@
 
 -(void) updateCalculatedDisplay {
     
-    [self displayVariableValueWithVariables:self.testDisplayValues];
+//    [self displayVariableValueWithVariables:self.testDisplayValues];
     id result = [CalculatorBrain runProgram:self.calculatorBrain.program withVariables:self.testDisplayValues];
     if([result isKindOfClass:[NSNumber class]]) self.display.text = [NSString stringWithFormat:@"%g",[result doubleValue]];
     else if ([result isKindOfClass:[NSString class]]) self.display.text = [NSString stringWithFormat:@"%@", result];
@@ -106,6 +106,7 @@
 }
 
 
+/*
 -(void)displayVariableValueWithVariables:(NSDictionary *)valueDict {
     
     
@@ -132,6 +133,8 @@
     }
     
 }
+ 
+*/
 
 - (IBAction)operationPressed:(UIButton *)sender {
     
@@ -216,7 +219,6 @@
     [self.calculatorBrain reset];
     self.display.text = @"0";
     self.history.text = @"";
-    self.variableDisplay.text = @"";
     self.testDisplayValues = nil;
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }

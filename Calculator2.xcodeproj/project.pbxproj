@@ -22,6 +22,9 @@
 		ACCE970717CDC16D00913899 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACCE970517CDC16D00913899 /* InfoPlist.strings */; };
 		ACCE970917CDC16D00913899 /* Calculator2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCE970817CDC16D00913899 /* Calculator2Tests.m */; };
 		ACCE971417CDFB9700913899 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCE971317CDFB9700913899 /* CalculatorBrain.m */; };
+		ACD85719180596E4003A9788 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD85718180596E4003A9788 /* AxesDrawer.m */; };
+		ACD8571C180599E0003A9788 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD8571B180599E0003A9788 /* GraphViewController.m */; };
+		ACD8571F18059B0B003A9788 /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD8571E18059B0B003A9788 /* GraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,12 @@
 		ACCE970817CDC16D00913899 /* Calculator2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Calculator2Tests.m; sourceTree = "<group>"; };
 		ACCE971217CDFB9700913899 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		ACCE971317CDFB9700913899 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
+		ACD85717180596E4003A9788 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
+		ACD85718180596E4003A9788 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
+		ACD8571A180599E0003A9788 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		ACD8571B180599E0003A9788 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		ACD8571D18059B0B003A9788 /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		ACD8571E18059B0B003A9788 /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +124,12 @@
 		ACCE96E317CDC16D00913899 /* Calculator2 */ = {
 			isa = PBXGroup;
 			children = (
+				ACD8571A180599E0003A9788 /* GraphViewController.h */,
+				ACD8571B180599E0003A9788 /* GraphViewController.m */,
+				ACD8571D18059B0B003A9788 /* GraphView.h */,
+				ACD8571E18059B0B003A9788 /* GraphView.m */,
+				ACD85717180596E4003A9788 /* AxesDrawer.h */,
+				ACD85718180596E4003A9788 /* AxesDrawer.m */,
 				ACCE96EC17CDC16D00913899 /* CalculatorAppDelegate.h */,
 				ACCE96ED17CDC16D00913899 /* CalculatorAppDelegate.m */,
 				ACCE96EF17CDC16D00913899 /* Main.storyboard */,
@@ -258,10 +273,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACD85719180596E4003A9788 /* AxesDrawer.m in Sources */,
 				ACCE96EE17CDC16D00913899 /* CalculatorAppDelegate.m in Sources */,
 				ACCE96EA17CDC16D00913899 /* main.m in Sources */,
 				ACCE971417CDFB9700913899 /* CalculatorBrain.m in Sources */,
+				ACD8571F18059B0B003A9788 /* GraphView.m in Sources */,
 				ACCE96F417CDC16D00913899 /* CalculatorViewController.m in Sources */,
+				ACD8571C180599E0003A9788 /* GraphViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +486,7 @@
 				ACCE970E17CDC16D00913899 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ACCE970F17CDC16D00913899 /* Build configuration list for PBXNativeTarget "Calculator2Tests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +495,7 @@
 				ACCE971117CDC16D00913899 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
