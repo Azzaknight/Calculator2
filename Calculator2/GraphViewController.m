@@ -56,8 +56,13 @@ GraphViewDataSource Methods
     [self.graphView addGestureRecognizer:tgr];
     
     [self.graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
+    
     self.graphView.dataSource = self;
-    self.equationLabel.text = [@"y = " stringByAppendingString:[self equationToGraph]];
+    
+    NSString* equation = [self equationToGraph];
+    if ([equation isEqualToString:@""]) equation = @"0";
+    self.equationLabel.text = [@"y = " stringByAppendingString:equation];
+
     
 }
 
