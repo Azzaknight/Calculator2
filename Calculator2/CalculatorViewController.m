@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
+#import "GraphViewController.h"
 
 @interface CalculatorViewController ()
 
@@ -222,5 +223,18 @@
     self.testDisplayValues = nil;
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
+
+////////////////////////  Assignment 3 Onwards Code
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+    if([[sender currentTitle] isEqualToString:@"Graph"])
+    {
+        [segue.destinationViewController setGraphViewProgramStack:self.calculatorBrain.program];
+    }
+}
+
+
 
 @end

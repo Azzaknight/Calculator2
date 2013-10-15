@@ -8,21 +8,56 @@
 
 #import "GraphViewController.h"
 #import "GraphView.h"
+#import "CalculatorBrain.h"
 
-@interface GraphViewController ()
+
+@interface GraphViewController () <GraphVewDataSource>
 
 @property (nonatomic, weak) IBOutlet GraphView * graphView;
-
+@property (nonatomic, weak) IBOutlet UILabel * equationLabel;
 @end
 
 @implementation GraphViewController
+
+/*
+GraphViewDataSource Methods
+ */
+
+-(double) valueOfYForValueX:(double) x inGraphView:(GraphView *) sender
+{
+    
+    NSDictionary * valueOfX = @{@"x":@(x)};
+    id result = [CalculatorBrain runProgram:self.graphViewProgramStack withVariables:valueOfX];
+    if ([result isKindOfClass:[NSNumber class]])
+    {
+        return [result doubleValue];
+        
+    }else return 0;
+    
+}
+
+
+// Helper method to get the Equation String, the equation to Graph
+-(NSString *) equationToGraph
+{
+    return [CalculatorBrain descriptionOfProgram:self.graphViewProgramStack];
+    
+}
+
+
+
 
 -(void) setGraphView:(GraphView *)graphView
 {
     _graphView = graphView;
     // enable the gesture recognisers here...
-    [self.graphView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(taps:)]];
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(taps:)];
+    tgr.numberOfTapsRequired = 3;
+    [self.graphView addGestureRecognizer:tgr];
+    
     [self.graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
+    self.graphView.dataSource = self;
+    self.equationLabel.text = [@"y = " stringByAppendingString:[self equationToGraph]];
     
 }
 

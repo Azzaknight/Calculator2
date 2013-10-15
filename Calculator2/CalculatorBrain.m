@@ -159,7 +159,7 @@
     
     NSLog(@"The items in the array %i", [variableList count]);
     if ([variableList count] != 0) {
-        NSLog(@"I shouldnt reach here");
+        NSLog(@"I am here because there are variables");
         return [variableList copy];
     } else return nil;
     

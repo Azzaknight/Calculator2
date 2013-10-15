@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface GraphViewController : UIViewController
 
 // the model of the GraphicViewController is the program of the calculator which
 // is the NSArray of the operands and operations!
 
+// Should this be private? No this needs to be public as the CalculatorController needs to set it when segueing
 
+@property (nonatomic, strong) id graphViewProgramStack;
 
 @end

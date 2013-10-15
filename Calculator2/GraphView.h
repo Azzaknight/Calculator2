@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GraphView;
+
+@protocol GraphVewDataSource <NSObject>
+
+-(double) valueOfYForValueX:(double) x inGraphView:(GraphView *) sender;
+
+@end
+
+
 
 @interface GraphView : UIView
 
 @property (nonatomic) CGPoint myGraphOrigin;
 @property (nonatomic) CGFloat myGraphScale;
+@property (nonatomic, weak) IBOutlet id <GraphVewDataSource> dataSource;
 
 -(void)taps:(UITapGestureRecognizer *) gesture;
 -(void)pinch:(UIPinchGestureRecognizer *)gesture;
