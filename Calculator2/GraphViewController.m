@@ -57,6 +57,8 @@ GraphViewDataSource Methods
     
     [self.graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
     
+    [self.graphView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pan:)]];
+    
     self.graphView.dataSource = self;
     
     NSString* equation = [self equationToGraph];

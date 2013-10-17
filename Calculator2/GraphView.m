@@ -92,6 +92,19 @@
     }
 }
 
+-(void)pan:(UIPanGestureRecognizer *) gesture
+{
+    if (gesture.state == UIGestureRecognizerStateChanged ||
+        gesture.state == UIGestureRecognizerStateEnded)
+    {
+        CGPoint movedTo = [gesture translationInView:self];
+        movedTo.x += self.myGraphOrigin.x;
+        movedTo.y += self.myGraphOrigin.y;
+        [self setMyGraphOrigin:movedTo];
+        [gesture setTranslation:CGPointZero inView:self];
+    }
+}
+
 
 - (void)drawRect:(CGRect)rect
 {
