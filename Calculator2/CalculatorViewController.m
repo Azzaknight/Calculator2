@@ -226,10 +226,44 @@
 
 ////////////////////////  Assignment 3 Onwards Code
 
+
+-(GraphViewController *) splitViewGraphViewController
+{
+    id gvc = [self.splitViewController.viewControllers lastObject];
+    if (![gvc isKindOfClass:[GraphViewController class]]){
+        
+        gvc = nil;
+        NSLog(@"I cannot get the GraphViewController!!!!!!!");
+    }
+    
+    
+    return gvc;
+    
+}
+
+
+- (IBAction)graphPressed:(id)sender {
+    
+    NSLog(@"Graph Button Pressed");
+    
+    if ([self splitViewGraphViewController]) // If there is a graphvc which means we are in a splitvew
+    {
+        NSLog(@"Program Received!");
+        [self splitViewGraphViewController].graphViewProgramStack = self.calculatorBrain.program;
+        
+    }else {
+        
+        [self performSegueWithIdentifier:@"Graph" sender:self];
+        
+    }
+    
+    
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if([[sender currentTitle] isEqualToString:@"Graph"])
+    if([[segue identifier] isEqualToString:@"Graph"])
     {
         [segue.destinationViewController setGraphViewProgramStack:self.calculatorBrain.program];
     }

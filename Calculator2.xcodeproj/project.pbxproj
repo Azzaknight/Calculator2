@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC4D5090180F7E5900C624B6 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC4D508F180F7E5900C624B6 /* iPad.storyboard */; };
 		ACCE96DE17CDC16D00913899 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96DD17CDC16D00913899 /* Foundation.framework */; };
 		ACCE96E017CDC16D00913899 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96DF17CDC16D00913899 /* CoreGraphics.framework */; };
 		ACCE96E217CDC16D00913899 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96E117CDC16D00913899 /* UIKit.framework */; };
 		ACCE96E817CDC16D00913899 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACCE96E617CDC16D00913899 /* InfoPlist.strings */; };
 		ACCE96EA17CDC16D00913899 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCE96E917CDC16D00913899 /* main.m */; };
 		ACCE96EE17CDC16D00913899 /* CalculatorAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCE96ED17CDC16D00913899 /* CalculatorAppDelegate.m */; };
-		ACCE96F117CDC16D00913899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACCE96EF17CDC16D00913899 /* Main.storyboard */; };
+		ACCE96F117CDC16D00913899 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACCE96EF17CDC16D00913899 /* iPhone.storyboard */; };
 		ACCE96F417CDC16D00913899 /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACCE96F317CDC16D00913899 /* CalculatorViewController.m */; };
 		ACCE96F617CDC16D00913899 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACCE96F517CDC16D00913899 /* Images.xcassets */; };
 		ACCE96FD17CDC16D00913899 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96FC17CDC16D00913899 /* XCTest.framework */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC4D508F180F7E5900C624B6 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPad.storyboard; path = ../iPad.storyboard; sourceTree = "<group>"; };
 		ACCE96DA17CDC16D00913899 /* Calculator2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACCE96DD17CDC16D00913899 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ACCE96DF17CDC16D00913899 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,7 +50,7 @@
 		ACCE96EB17CDC16D00913899 /* Calculator2-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Calculator2-Prefix.pch"; sourceTree = "<group>"; };
 		ACCE96EC17CDC16D00913899 /* CalculatorAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorAppDelegate.h; sourceTree = "<group>"; };
 		ACCE96ED17CDC16D00913899 /* CalculatorAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorAppDelegate.m; sourceTree = "<group>"; };
-		ACCE96F017CDC16D00913899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ACCE96F017CDC16D00913899 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/iPhone.storyboard; sourceTree = "<group>"; };
 		ACCE96F217CDC16D00913899 /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
 		ACCE96F317CDC16D00913899 /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		ACCE96F517CDC16D00913899 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 		ACCE96E317CDC16D00913899 /* Calculator2 */ = {
 			isa = PBXGroup;
 			children = (
+				AC4D508F180F7E5900C624B6 /* iPad.storyboard */,
 				ACD8571A180599E0003A9788 /* GraphViewController.h */,
 				ACD8571B180599E0003A9788 /* GraphViewController.m */,
 				ACD8571D18059B0B003A9788 /* GraphView.h */,
@@ -132,7 +135,7 @@
 				ACD85718180596E4003A9788 /* AxesDrawer.m */,
 				ACCE96EC17CDC16D00913899 /* CalculatorAppDelegate.h */,
 				ACCE96ED17CDC16D00913899 /* CalculatorAppDelegate.m */,
-				ACCE96EF17CDC16D00913899 /* Main.storyboard */,
+				ACCE96EF17CDC16D00913899 /* iPhone.storyboard */,
 				ACCE971217CDFB9700913899 /* CalculatorBrain.h */,
 				ACCE971317CDFB9700913899 /* CalculatorBrain.m */,
 				ACCE96F217CDC16D00913899 /* CalculatorViewController.h */,
@@ -253,8 +256,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACCE96F617CDC16D00913899 /* Images.xcassets in Resources */,
+				AC4D5090180F7E5900C624B6 /* iPad.storyboard in Resources */,
 				ACCE96E817CDC16D00913899 /* InfoPlist.strings in Resources */,
-				ACCE96F117CDC16D00913899 /* Main.storyboard in Resources */,
+				ACCE96F117CDC16D00913899 /* iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,12 +314,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		ACCE96EF17CDC16D00913899 /* Main.storyboard */ = {
+		ACCE96EF17CDC16D00913899 /* iPhone.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				ACCE96F017CDC16D00913899 /* Base */,
 			);
-			name = Main.storyboard;
+			name = iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 		ACCE970517CDC16D00913899 /* InfoPlist.strings */ = {
@@ -406,8 +410,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator2/Calculator2-Prefix.pch";
 				INFOPLIST_FILE = "Calculator2/Calculator2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -421,8 +426,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator2/Calculator2-Prefix.pch";
 				INFOPLIST_FILE = "Calculator2/Calculator2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

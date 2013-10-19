@@ -38,9 +38,11 @@ GraphViewDataSource Methods
 
 
 // Helper method to get the Equation String, the equation to Graph
--(NSString *) equationToGraph
+-(void) equationToGraph
 {
-    return [CalculatorBrain descriptionOfProgram:self.graphViewProgramStack];
+    NSString* equation =  [CalculatorBrain descriptionOfProgram:self.graphViewProgramStack];
+    if ([equation isEqualToString:@""]) equation = @"0";
+    self.equationLabel.text = [@"y = " stringByAppendingString:equation];
     
 }
 
@@ -60,12 +62,19 @@ GraphViewDataSource Methods
     [self.graphView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pan:)]];
     
     self.graphView.dataSource = self;
+    [self equationToGraph];
     
-    NSString* equation = [self equationToGraph];
-    if ([equation isEqualToString:@""]) equation = @"0";
-    self.equationLabel.text = [@"y = " stringByAppendingString:equation];
+}
 
-    
+-(void)setGraphViewProgramStack:(id)graphViewProgramStack
+{
+    if (_graphViewProgramStack != graphViewProgramStack)
+    {
+        NSLog(@"Setting the graph view stack");
+        _graphViewProgramStack = graphViewProgramStack;
+        [self equationToGraph];
+        [self.graphView setNeedsDisplay];
+    }
 }
 
 
@@ -86,6 +95,20 @@ GraphViewDataSource Methods
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    // Basically the view has just been rotated. Change the view's midpoint
+    // and ask it to redraw itself
+    
+    CGPoint midPoint;
+    midPoint.x = self.graphView.bounds.origin.x + self.graphView.bounds.size.width / 2;
+    midPoint.y = self.graphView.bounds.origin.y + self.graphView.bounds.size.height / 2;
+    
+    self.graphView.myGraphOrigin = midPoint;
+    [self.graphView setNeedsDisplay];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

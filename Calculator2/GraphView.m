@@ -19,23 +19,38 @@
 @synthesize myGraphOrigin = _myGraphOrigin;
 @synthesize myGraphScale = _myGraphScale;
 
+
+-(void) setup
+{
+    self.contentMode = UIViewContentModeRedraw;
+}
+
+-(void) awakeFromNib
+{
+    [self setup];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialisation code
+        [self setup];
     }
     return self;
 }
 
+
 -(CGPoint)myGraphOrigin
 {
-    if (! _myGraphOrigin.x || ! _myGraphOrigin.y)
+    if (!_myGraphOrigin.x && !_myGraphOrigin.y)
     {
         CGPoint midPoint;
         midPoint.x = self.bounds.origin.x + self.bounds.size.width / 2;
         midPoint.y = self.bounds.origin.y + self.bounds.size.height / 2;
-        _myGraphOrigin = midPoint;
+        
+        self.myGraphOrigin = midPoint;
+    
     }
     return _myGraphOrigin;
 }
@@ -110,15 +125,13 @@
 {
     // Drawing code
     // First draw the Axes using the Axes Drawer
+    
     [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.myGraphOrigin scale:self.myGraphScale ];
     
     // - Get the bounds of the view to get the width in the current scale
-    
-    CGFloat myWidth = self.bounds.size.width/self.myGraphScale;
+
     CGFloat xAxisOffset = self.myGraphOrigin.x/self.myGraphScale;
     CGFloat yAxisOffset = self.myGraphOrigin.y/self.myGraphScale;
-    
-    NSLog(@"My width is %g, Origin is %g",myWidth, xAxisOffset);
     
     // BOOL to move the CGContextMoveToPoint to the starting point
     BOOL FirstPoint = YES;
@@ -139,12 +152,12 @@
         
         // for the graph cordinaite point X get the graph cordinate point Y
         graphPoint.y = [self.dataSource valueOfYForValueX:graphPoint.x inGraphView:self];
-        NSLog(@"x = %g, y= %g", graphPoint.x, graphPoint.y);
+        //NSLog(@"x = %g, y= %g", graphPoint.x, graphPoint.y);
         
         //for the graph cordinate point y - get the screen co-ordinates y
         graphPoint.y = yAxisOffset - graphPoint.y;
         graphPoint.y = graphPoint.y * self.myGraphScale;
-        NSLog(@"viewx = %d, viewyy= %g", intx, graphPoint.y);
+        //NSLog(@"viewx = %d, viewyy= %g", intx, graphPoint.y);
 
         // if it's the first point then move the ContextPoint here
         // else draw a line to this point (fromt the last point!)
