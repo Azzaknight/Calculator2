@@ -13,11 +13,52 @@
 
 @interface GraphViewController () <GraphVewDataSource>
 
-@property (nonatomic, weak) IBOutlet GraphView * graphView;
-@property (nonatomic, weak) IBOutlet UILabel * equationLabel;
+@property (nonatomic, weak) IBOutlet GraphView * graphView; // outlet to graoph to draw the graph in
+@property (nonatomic, weak) IBOutlet UILabel * equationLabel; // outlet to label to write the equation in
+@property (nonatomic, weak) IBOutlet UIToolbar * toolbar;   // outlet to toolbar to add the button to
 @end
 
 @implementation GraphViewController
+
+////
+
+
+
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+-(void)splitViewController:(UISplitViewController *)svc
+    willHideViewController:(UIViewController *)aViewController
+         withBarButtonItem:(UIBarButtonItem *)barButtonItem
+      forPopoverController:(UIPopoverController *)pc
+{
+    
+    // set the title of the BarButton to self
+    // then present the button to the SplitViewBarButtonitemPresenter
+    barButtonItem.title = aViewController.title;
+    
+    NSMutableArray * toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems insertObject:barButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
+    
+}
+
+-(void)splitViewController:(UISplitViewController *)svc
+    willShowViewController:(UIViewController *)aViewController
+ invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    NSMutableArray * toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems removeObject:barButtonItem];
+    self.toolbar.items = toolbarItems;
+}
+
+
+
+////
 
 /*
 GraphViewDataSource Methods
@@ -70,7 +111,6 @@ GraphViewDataSource Methods
 {
     if (_graphViewProgramStack != graphViewProgramStack)
     {
-        NSLog(@"Setting the graph view stack");
         _graphViewProgramStack = graphViewProgramStack;
         [self equationToGraph];
         [self.graphView setNeedsDisplay];
@@ -81,13 +121,30 @@ GraphViewDataSource Methods
 // ****************************  Inititalisation code that came with the class declaration
 
 
+-(void)setup
+{
+    if(self.splitViewController)
+    {
+        self.splitViewController.delegate = self;
+    }
+    
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        [self setup];
+        
     }
     return self;
+}
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self setup];
 }
 
 - (void)viewDidLoad
@@ -95,6 +152,7 @@ GraphViewDataSource Methods
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
@@ -106,7 +164,7 @@ GraphViewDataSource Methods
     midPoint.y = self.graphView.bounds.origin.y + self.graphView.bounds.size.height / 2;
     
     self.graphView.myGraphOrigin = midPoint;
-    [self.graphView setNeedsDisplay];
+    //[self.graphView setNeedsDisplay];
 }
 
 

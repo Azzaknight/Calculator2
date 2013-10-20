@@ -150,16 +150,14 @@
     for (id items in programStack) {
         if([items isKindOfClass:[NSString class]]) {
             if (![self isOperation:items]){
-                NSLog(@"The name of the variable is %@", items);
                 [variableList addObject:items];
             }
         }
     }
     
     
-    NSLog(@"The items in the array %i", [variableList count]);
+    
     if ([variableList count] != 0) {
-        NSLog(@"I am here because there are variables");
         return [variableList copy];
     } else return nil;
     
@@ -195,7 +193,6 @@
                 }
             }
         }
-        NSLog(@"%@",[self descriptionOfProgram:program]);
         return [self popOperandOffStack:stack];
         
     }

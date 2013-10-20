@@ -244,11 +244,9 @@
 
 - (IBAction)graphPressed:(id)sender {
     
-    NSLog(@"Graph Button Pressed");
     
     if ([self splitViewGraphViewController]) // If there is a graphvc which means we are in a splitvew
     {
-        NSLog(@"Program Received!");
         [self splitViewGraphViewController].graphViewProgramStack = self.calculatorBrain.program;
         
     }else {

@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface GraphViewController : UIViewController
+@interface GraphViewController : UIViewController <UISplitViewControllerDelegate>
 
 // the model of the GraphicViewController is the program of the calculator which
 // is the NSArray of the operands and operations!

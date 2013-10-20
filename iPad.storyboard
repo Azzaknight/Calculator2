@@ -12,8 +12,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="redraw" id="PtX-A3-3Vi" customClass="GraphView">
-                                <rect key="frame" x="0.0" y="20" width="768" height="964"/>
+                            <view contentMode="center" id="PtX-A3-3Vi" customClass="GraphView">
+                                <rect key="frame" x="0.0" y="66" width="768" height="918"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
@@ -27,6 +27,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="w9H-S0-tod">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items/>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -34,16 +39,17 @@
                     <connections>
                         <outlet property="equationLabel" destination="CZI-dm-Ba0" id="t7O-Y4-mpy"/>
                         <outlet property="graphView" destination="PtX-A3-3Vi" id="eYT-tP-iLh"/>
+                        <outlet property="toolbar" destination="w9H-S0-tod" id="qDk-85-vaN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9r-qb-bNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="515" y="-75"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Calculator-->
         <scene sceneID="V58-EA-BG4">
             <objects>
-                <navigationController id="ioR-P2-ds0" sceneMemberID="viewController">
+                <navigationController title="Calculator" id="ioR-P2-ds0" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="NOG-dl-1AS">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -72,7 +78,7 @@
         <!--Calculator View Controller - Calculator-->
         <scene sceneID="G8R-UZ-tRy">
             <objects>
-                <viewController title="Calculator" id="Sz9-8c-aEQ" customClass="CalculatorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Calculator" title="Calculator" id="Sz9-8c-aEQ" customClass="CalculatorViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FO7-6W-DI0">
                         <rect key="frame" x="0.0" y="64" width="320" height="788"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
