@@ -62,6 +62,10 @@
     {
         _myGraphOrigin = myGraphOrigin;
         [self setNeedsDisplay];
+        
+        // Not only the above, but if my Origin is Set, I should save these in the user defaults of the application
+        [self.dataSource storeOrigin:_myGraphOrigin inGraphView:self];
+        
     }
     
     
@@ -84,6 +88,9 @@
     {
         _myGraphScale = myGraphScale;
         [self setNeedsDisplay];
+        
+        // The graph scale has been set, now save it in the NSUserDefaults
+        [self.dataSource storeScale:_myGraphScale inGraphView:self];
     }
 }
 
@@ -143,7 +150,7 @@
 
     CGContextBeginPath(context);
     
-    for( int intx=0; intx < self.bounds.size.width; intx ++){
+    for( int intx=0; intx < (self.bounds.size.width * self.contentScaleFactor) ; intx ++){
         
         // for intx = point 0, get the corresponding x in graph cordinate
         CGPoint graphPoint;

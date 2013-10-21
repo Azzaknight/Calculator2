@@ -13,7 +13,7 @@
 
 @interface GraphViewController () <GraphVewDataSource>
 
-@property (nonatomic, weak) IBOutlet GraphView * graphView; // outlet to graoph to draw the graph in
+@property (nonatomic, weak) IBOutlet GraphView * graphView; // outlet to GraphView to draw the graph in
 @property (nonatomic, weak) IBOutlet UILabel * equationLabel; // outlet to label to write the equation in
 @property (nonatomic, weak) IBOutlet UIToolbar * toolbar;   // outlet to toolbar to add the button to
 @end
@@ -77,6 +77,24 @@ GraphViewDataSource Methods
     
 }
 
+-(void) storeScale:(CGFloat) scale inGraphView:(GraphView *) sender
+{
+    NSString *scaleKeyName = @"scale.graphView";
+    [[NSUserDefaults standardUserDefaults] setFloat:scale forKey:scaleKeyName];
+    
+}
+
+
+-(void) storeOrigin:(CGPoint) origin inGraphView:(GraphView *) sender
+{
+    NSString *xKeyName = @"originx.graphView";
+    NSString *yKeyName = @"originy.graphView";
+    
+    [[NSUserDefaults standardUserDefaults] setFloat:origin.x forKey:xKeyName];
+    [[NSUserDefaults standardUserDefaults] setFloat:origin.y forKey:yKeyName];
+    
+}
+
 
 // Helper method to get the Equation String, the equation to Graph
 -(void) equationToGraph
@@ -93,6 +111,7 @@ GraphViewDataSource Methods
 -(void) setGraphView:(GraphView *)graphView
 {
     _graphView = graphView;
+    
     // enable the gesture recognisers here...
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(taps:)];
     tgr.numberOfTapsRequired = 3;
@@ -105,6 +124,25 @@ GraphViewDataSource Methods
     self.graphView.dataSource = self;
     [self equationToGraph];
     
+    // see if there are NSUserDefaults for the scale and the origin
+    NSString* scaleKeyName = @"scale.graphView";
+    NSString *xKeyName = @"originx.graphView";
+    NSString *yKeyName = @"originy.graphView";
+    
+    CGFloat scale = [[NSUserDefaults standardUserDefaults] floatForKey:scaleKeyName];
+    if(scale) self.graphView.myGraphScale = scale;
+    
+    CGFloat originx = [[NSUserDefaults standardUserDefaults] floatForKey:xKeyName];
+    CGFloat originy = [[NSUserDefaults standardUserDefaults] floatForKey:yKeyName];
+    
+    if(originx && originy)
+    {
+        CGPoint origin;
+        origin.x = originx;
+        origin.y = originy;
+        
+        self.graphView.myGraphOrigin = origin;
+    }
 }
 
 -(void)setGraphViewProgramStack:(id)graphViewProgramStack
@@ -153,7 +191,7 @@ GraphViewDataSource Methods
 	// Do any additional setup after loading the view.
 }
 
-
+/*
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     // Basically the view has just been rotated. Change the view's midpoint
@@ -166,7 +204,7 @@ GraphViewDataSource Methods
     self.graphView.myGraphOrigin = midPoint;
     //[self.graphView setNeedsDisplay];
 }
-
+*/
 
 - (void)didReceiveMemoryWarning
 {

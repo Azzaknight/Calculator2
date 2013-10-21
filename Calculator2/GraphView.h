@@ -12,6 +12,8 @@
 @protocol GraphVewDataSource <NSObject>
 
 -(double) valueOfYForValueX:(double) x inGraphView:(GraphView *) sender;
+-(void) storeScale:(CGFloat) scale inGraphView:(GraphView *) sender;
+-(void) storeOrigin:(CGPoint) origin inGraphView:(GraphView *) sender;
 
 @end
 
