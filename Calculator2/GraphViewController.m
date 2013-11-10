@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet GraphView * graphView; // outlet to GraphView to draw the graph in
 @property (nonatomic, weak) IBOutlet UILabel * equationLabel; // outlet to label to write the equation in
 @property (nonatomic, weak) IBOutlet UIToolbar * toolbar;   // outlet to toolbar to add the button to
+@property (nonatomic, weak) IBOutlet UISwitch * lineDotSwitch; // switch used to change from line-dot drawing mode
 @end
 
 @implementation GraphViewController
@@ -95,6 +96,15 @@ GraphViewDataSource Methods
     
 }
 
+-(BOOL) isdrawingModeLine
+{
+    return [self.lineDotSwitch isOn];
+}
+
+-(void) mySwitchAction
+{
+    [self.graphView setNeedsDisplay];
+}
 
 // Helper method to get the Equation String, the equation to Graph
 -(void) equationToGraph
@@ -105,8 +115,11 @@ GraphViewDataSource Methods
     
 }
 
-
-
+-(void) setLineDotSwitch:(UISwitch *)lineDotSwitch
+{
+    _lineDotSwitch = lineDotSwitch;
+    [self.lineDotSwitch addTarget:self action:@selector(mySwitchAction) forControlEvents:UIControlEventValueChanged];
+}
 
 -(void) setGraphView:(GraphView *)graphView
 {
@@ -205,6 +218,8 @@ GraphViewDataSource Methods
     //[self.graphView setNeedsDisplay];
 }
 */
+- (IBAction)addToFavourites:(id)sender {
+}
 
 - (void)didReceiveMemoryWarning
 {

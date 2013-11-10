@@ -168,20 +168,28 @@
 
         // if it's the first point then move the ContextPoint here
         // else draw a line to this point (fromt the last point!)
-        if(FirstPoint)
-        {
-            CGContextMoveToPoint(context, intx, graphPoint.y);
-            FirstPoint = NO; // No longet firstPoint!
-            
-        } else
-        {
-            CGContextAddLineToPoint(context, intx, graphPoint.y);
-        }
         
+        if([self.dataSource isdrawingModeLine])
+           {
+               if(FirstPoint)
+               {
+                   CGContextMoveToPoint(context, intx, graphPoint.y);
+                   FirstPoint = NO; // No longet firstPoint!
+               } else
+               {
+                   CGContextAddLineToPoint(context, intx, graphPoint.y);
+                   //CGContextFillRect(context, CGRectMake(intx,graphPoint.y,1,1));
+               }
+               
+           } else
+           {
+               CGContextFillRect(context, CGRectMake(intx,graphPoint.y,1,1));
+           }
     }
     
     CGContextStrokePath(context);
-    
+    //CGContextFillPath(context); // Definitely no no
+    //CGContextDrawPath(context, kCGPathStroke);
 }
 
 
