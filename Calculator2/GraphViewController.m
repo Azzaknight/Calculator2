@@ -9,9 +9,10 @@
 #import "GraphViewController.h"
 #import "GraphView.h"
 #import "CalculatorBrain.h"
+#import "GraphFavouritesViewController.h"
 
 
-@interface GraphViewController () <GraphVewDataSource>
+@interface GraphViewController () <GraphVewDataSource, GraphsFavouritesViewControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet GraphView * graphView; // outlet to GraphView to draw the graph in
 @property (nonatomic, weak) IBOutlet UILabel * equationLabel; // outlet to label to write the equation in
@@ -60,6 +61,19 @@
 
 
 ////
+
+/*
+ GraphsFavouritesViewControllerDelegate Methods
+ */
+
+-(void) graphFavouritesViewController:(GraphFavouritesViewController *)sender
+                         choseProgram:(id)program;
+{
+    
+    self.graphViewProgramStack = program;
+    
+}
+
 
 /*
 GraphViewDataSource Methods
@@ -218,7 +232,28 @@ GraphViewDataSource Methods
     //[self.graphView setNeedsDisplay];
 }
 */
+
+
+#define FAV_KEY @"GraphViewController.Favourite"
+
 - (IBAction)addToFavourites:(id)sender {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *favourites = [[defaults objectForKey:FAV_KEY] mutableCopy];
+    if(!favourites) favourites = [NSMutableArray array];
+    [favourites addObject:self.graphViewProgramStack];
+    [defaults setObject:favourites forKey:FAV_KEY];
+    [defaults synchronize];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Show Favourites"])
+    {
+        NSArray * programs = [[NSUserDefaults standardUserDefaults] objectForKey:FAV_KEY];
+        [segue.destinationViewController setDelegate:self];
+        [segue.destinationViewController setPrograms:programs];
+    }
 }
 
 - (void)didReceiveMemoryWarning

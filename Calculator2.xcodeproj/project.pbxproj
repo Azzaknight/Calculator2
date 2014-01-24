@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AC4D5090180F7E5900C624B6 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC4D508F180F7E5900C624B6 /* iPad.storyboard */; };
+		ACB44C43182F848000A51EF2 /* GraphFavouritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB44C42182F848000A51EF2 /* GraphFavouritesViewController.m */; };
 		ACCE96DE17CDC16D00913899 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96DD17CDC16D00913899 /* Foundation.framework */; };
 		ACCE96E017CDC16D00913899 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96DF17CDC16D00913899 /* CoreGraphics.framework */; };
 		ACCE96E217CDC16D00913899 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACCE96E117CDC16D00913899 /* UIKit.framework */; };
@@ -40,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		AC4D508F180F7E5900C624B6 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPad.storyboard; path = ../iPad.storyboard; sourceTree = "<group>"; };
+		ACB44C41182F848000A51EF2 /* GraphFavouritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphFavouritesViewController.h; sourceTree = "<group>"; };
+		ACB44C42182F848000A51EF2 /* GraphFavouritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphFavouritesViewController.m; sourceTree = "<group>"; };
 		ACCE96DA17CDC16D00913899 /* Calculator2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACCE96DD17CDC16D00913899 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ACCE96DF17CDC16D00913899 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				AC4D508F180F7E5900C624B6 /* iPad.storyboard */,
+				ACB44C41182F848000A51EF2 /* GraphFavouritesViewController.h */,
+				ACB44C42182F848000A51EF2 /* GraphFavouritesViewController.m */,
 				ACD8571A180599E0003A9788 /* GraphViewController.h */,
 				ACD8571B180599E0003A9788 /* GraphViewController.m */,
 				ACD8571D18059B0B003A9788 /* GraphView.h */,
@@ -280,6 +285,7 @@
 				ACD85719180596E4003A9788 /* AxesDrawer.m in Sources */,
 				ACCE96EE17CDC16D00913899 /* CalculatorAppDelegate.m in Sources */,
 				ACCE96EA17CDC16D00913899 /* main.m in Sources */,
+				ACB44C43182F848000A51EF2 /* GraphFavouritesViewController.m in Sources */,
 				ACCE971417CDFB9700913899 /* CalculatorBrain.m in Sources */,
 				ACD8571F18059B0B003A9788 /* GraphView.m in Sources */,
 				ACCE96F417CDC16D00913899 /* CalculatorViewController.m in Sources */,
